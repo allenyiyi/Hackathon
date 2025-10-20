@@ -8,7 +8,7 @@ namespace numerology
         {
             InitializeComponent();
             CreateList();
-            LoadLifeNumbers("C:\\Users\\Allen\\Desktop\\build school\\C#\\HW\\Hackathon\\¥Í©RÆF¼Æ.txt");
+            LoadLifeNumbers("ç”Ÿå‘½éˆæ•¸.txt");
         }
 
 
@@ -19,7 +19,7 @@ namespace numerology
             string zodiac = GetZodiac(birthDate);
             string description = GetDescription(zodiac, lifeNumber);
 
-            description_label.Text = $"Ãö©ó§A\n\n§Aªº¬P®y¬O {zodiac}\n§Aªº¥Í©RÆF¼Æ {lifeNumber} : {description}";
+            description_label.Text = $"é—œæ–¼ä½ \n\nä½ çš„æ˜Ÿåº§æ˜¯ {zodiac}\nä½ çš„ç”Ÿå‘½éˆæ•¸ {lifeNumber} : {description}";
         }
 
         private int CalculateLifeNumber(DateTime date)
@@ -56,7 +56,7 @@ namespace numerology
             string key = zodiac.Name+ lifeNumber.ToString();
             if (_lifeNumberDict.ContainsKey(key))
                 return _lifeNumberDict[key];
-            return "§ä¤£¨ì¹ïÀ³ÆF¼Æ´y­z";
+            return "æ‰¾ä¸åˆ°å°æ‡‰éˆæ•¸æè¿°";
         }
 
 
@@ -64,7 +64,7 @@ namespace numerology
         {
             if (!File.Exists(filePath))
             {
-                MessageBox.Show("§ä¤£¨ì LifeNumbers.txt ÀÉ®×¡I");
+                MessageBox.Show("æ‰¾ä¸åˆ° LifeNumbers.txt æª”æ¡ˆï¼");
                 return;
             }
 
@@ -74,20 +74,20 @@ namespace numerology
             foreach (string line in lines)
             {
                 string text = line.Trim();
-                if (text.StartsWith("¡i") && text.Contains("®y"))
+                if (text.StartsWith("ã€") && text.Contains("åº§"))
                 {
-                    int start = text.IndexOf('¡i') + 1;//¡i¦b¦r¦ê¤¤ªº¦ì¸m¡A+1¬O¥h±¼¥ª¬A¸¹
-                    int end = text.IndexOf('¡j');//¡j¦b¦r¦ê¤¤ªº¦ì¸m
-                    currentZodiac = text.Substring(start, end - start).Trim();//°Ñ¼Æ1:°_©l¦ì¸m¡A°Ñ¼Æ2:«ü©wªø«×
+                    int start = text.IndexOf('ã€') + 1;//ã€åœ¨å­—ä¸²ä¸­çš„ä½ç½®ï¼Œ+1æ˜¯å»æ‰å·¦æ‹¬è™Ÿ
+                    int end = text.IndexOf('ã€‘');//ã€‘åœ¨å­—ä¸²ä¸­çš„ä½ç½®
+                    currentZodiac = text.Substring(start, end - start).Trim();//åƒæ•¸1:èµ·å§‹ä½ç½®ï¼Œåƒæ•¸2:æŒ‡å®šé•·åº¦
                 }
-                else if (text.StartsWith("¥Í©RÆF¼Æ"))
+                else if (text.StartsWith("ç”Ÿå‘½éˆæ•¸"))
                 {
-                    int colonIndex = text.IndexOf('¡G');//:¦b¦r¦ê¤¤ªº¦ì¸m
+                    int colonIndex = text.IndexOf('ï¼š');//:åœ¨å­—ä¸²ä¸­çš„ä½ç½®
                     if (colonIndex > 0)
                     {
-                        string num = text.Substring(4, 1); // ¥Í©RÆF¼Æ«á­±±µªº¨º­Ó¼Æ¦r
+                        string num = text.Substring(4, 1); // ç”Ÿå‘½éˆæ•¸å¾Œé¢æ¥çš„é‚£å€‹æ•¸å­—
                         string key = currentZodiac + num;
-                        string value = text.Substring(colonIndex + 1).Trim();//¨ú±o:¤§«áªº´y­z
+                        string value = text.Substring(colonIndex + 1).Trim();//å–å¾—:ä¹‹å¾Œçš„æè¿°
                         if (!_lifeNumberDict.ContainsKey(key))
                             _lifeNumberDict[key] = value;
                     }
@@ -99,18 +99,18 @@ namespace numerology
         {
             _zodiacList = new List<Zodiac>
             {
-                new Zodiac { Name="Aries¨d¦Ï®y Aries", NameCN="¨d¦Ï®y", StartMonth=3, StartDay=21, EndMonth=4, EndDay=19 },
-                new Zodiac { Name="Taurusª÷¤û®y Taurus", NameCN="ª÷¤û®y", StartMonth=4, StartDay=20, EndMonth=5, EndDay=20 },
-                new Zodiac { Name="GeminiÂù¤l®y Gemini", NameCN="Âù¤l®y", StartMonth=5, StartDay=21, EndMonth=6, EndDay=20 },
-                new Zodiac { Name="Cancer¥¨ÃÉ®y Cancer", NameCN="¥¨ÃÉ®y", StartMonth=6, StartDay=21, EndMonth=7, EndDay=22 },
-                new Zodiac { Name="Leo·à¤l®y Leo", NameCN="·à¤l®y", StartMonth=7, StartDay=23, EndMonth=8, EndDay=22 },
-                new Zodiac { Name="Virgo³B¤k®y Virgo", NameCN="³B¤k®y", StartMonth=8, StartDay=23, EndMonth=9, EndDay=22 },
-                new Zodiac { Name="Libra¤Ñ¯¯®y Libra", NameCN="¤Ñ¯¯®y", StartMonth=9, StartDay=23, EndMonth=10, EndDay=22 },
-                new Zodiac { Name="Scorpio¤ÑÃÈ®y Scorpio", NameCN="¤ÑÃÈ®y", StartMonth=10, StartDay=23, EndMonth=11, EndDay=21 },
-                new Zodiac { Name="Sagittarius®g¤â®y Sagittarius", NameCN="®g¤â®y", StartMonth=11, StartDay=22, EndMonth=12, EndDay=21 },
-                new Zodiac { Name="Capricorn¼¯½~®y Capricorn", NameCN="¼¯½~®y", StartMonth=12, StartDay=22, EndMonth=1, EndDay=19 },
-                new Zodiac { Name="Aquarius¤ô²~®y Aquarius", NameCN="¤ô²~®y", StartMonth=1, StartDay=20, EndMonth=2, EndDay=18 },
-                new Zodiac { Name="PiscesÂù³½®y Pisces", NameCN="Âù³½®y", StartMonth=2, StartDay=19, EndMonth=3, EndDay=20 }
+                new Zodiac { Name="Ariesç‰¡ç¾Šåº§ Aries", NameCN="ç‰¡ç¾Šåº§", StartMonth=3, StartDay=21, EndMonth=4, EndDay=19 },
+                new Zodiac { Name="Taurusé‡‘ç‰›åº§ Taurus", NameCN="é‡‘ç‰›åº§", StartMonth=4, StartDay=20, EndMonth=5, EndDay=20 },
+                new Zodiac { Name="Geminié›™å­åº§ Gemini", NameCN="é›™å­åº§", StartMonth=5, StartDay=21, EndMonth=6, EndDay=20 },
+                new Zodiac { Name="Cancerå·¨èŸ¹åº§ Cancer", NameCN="å·¨èŸ¹åº§", StartMonth=6, StartDay=21, EndMonth=7, EndDay=22 },
+                new Zodiac { Name="Leoç…å­åº§ Leo", NameCN="ç…å­åº§", StartMonth=7, StartDay=23, EndMonth=8, EndDay=22 },
+                new Zodiac { Name="Virgoè™•å¥³åº§ Virgo", NameCN="è™•å¥³åº§", StartMonth=8, StartDay=23, EndMonth=9, EndDay=22 },
+                new Zodiac { Name="Libraå¤©ç§¤åº§ Libra", NameCN="å¤©ç§¤åº§", StartMonth=9, StartDay=23, EndMonth=10, EndDay=22 },
+                new Zodiac { Name="Scorpioå¤©è åº§ Scorpio", NameCN="å¤©è åº§", StartMonth=10, StartDay=23, EndMonth=11, EndDay=21 },
+                new Zodiac { Name="Sagittariuså°„æ‰‹åº§ Sagittarius", NameCN="å°„æ‰‹åº§", StartMonth=11, StartDay=22, EndMonth=12, EndDay=21 },
+                new Zodiac { Name="Capricornæ‘©ç¾¯åº§ Capricorn", NameCN="æ‘©ç¾¯åº§", StartMonth=12, StartDay=22, EndMonth=1, EndDay=19 },
+                new Zodiac { Name="Aquariusæ°´ç“¶åº§ Aquarius", NameCN="æ°´ç“¶åº§", StartMonth=1, StartDay=20, EndMonth=2, EndDay=18 },
+                new Zodiac { Name="Piscesé›™é­šåº§ Pisces", NameCN="é›™é­šåº§", StartMonth=2, StartDay=19, EndMonth=3, EndDay=20 }
             };
         }
     }
